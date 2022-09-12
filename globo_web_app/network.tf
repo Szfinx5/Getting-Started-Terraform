@@ -40,7 +40,7 @@ resource "aws_subnet" "subnet1" {
   cidr_block              = var.aws_subnet[0]
   vpc_id                  = aws_vpc.vpc.id
   map_public_ip_on_launch = var.map_public_ip_on_launch
-  availability_zone       = data.aws_availability_zones.available.name[0]
+  availability_zone       = data.aws_availability_zones.available.names[0]
   tags                    = local.common_tags
 }
 
@@ -48,7 +48,7 @@ resource "aws_subnet" "subnet2" {
   cidr_block              = var.aws_subnet[1]
   vpc_id                  = aws_vpc.vpc.id
   map_public_ip_on_launch = var.map_public_ip_on_launch
-  availability_zone       = data.aws_availability_zones.available.name[1]
+  availability_zone       = data.aws_availability_zones.available.names[1]
   tags                    = local.common_tags
 }
 
@@ -86,7 +86,7 @@ resource "aws_security_group" "nginx-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [var.aws_subnet]
+    cidr_blocks = [var.aws_vpc]
   }
 
   # outbound internet access
