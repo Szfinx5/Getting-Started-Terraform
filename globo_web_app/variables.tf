@@ -1,3 +1,9 @@
+variable "naming_prefix" {
+  type        = string
+  description = "Naming prefix for resources"
+  default     = "globoweb"
+}
+
 variable "aws_region" {
   type        = string
   description = "AWS Region"
@@ -8,6 +14,12 @@ variable "aws_vpc" {
   type        = string
   description = "AWS VPC network address"
   default     = "10.0.0.0/16"
+}
+
+variable "vpc_subnet_count" {
+  type        = number
+  description = "Number of subnet to create"
+  default     = 2
 }
 
 variable "enable_dns_hostnames" {
@@ -38,6 +50,12 @@ variable "aws_instance_type" {
   type        = string
   description = "AWS instance type"
   default     = "t2.micro"
+}
+
+variable "aws_instance_count" {
+  type        = number
+  description = "Number of EC2 instances to create"
+  default     = 2
 }
 
 variable "company" {
