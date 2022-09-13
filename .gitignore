@@ -1,6 +1,11 @@
 #  Local .terraform directories
 **/.terraform/*
-/m4_solution/*
+/m4_solution
+/m5_solution
+/m6_solution
+/m7_solution
+/m8_solution
+/m9_solution
 
 # .tfstate files
 *.tfstate
