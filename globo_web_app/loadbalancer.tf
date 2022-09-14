@@ -3,16 +3,16 @@ data "aws_elb_service_account" "root" {}
 
 ## aws_loadbalancer
 resource "aws_lb" "nginx" {
-  name               = "globo-web-alb"
+  name               = "${local.name_prefix}-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.nginx-sg_2.id]
-  subnets            = aws_subnet.subnets[*].id
+  subnets            = module.vpc.public_subnets
 
   enable_deletion_protection = false
 
   access_logs {
-    bucket  = aws_s3_bucket.web_bucket.bucket
+    bucket  = module.web_app_s3.web_bucket.id
     prefix  = "alb-logs"
     enabled = true
   }
@@ -21,10 +21,10 @@ resource "aws_lb" "nginx" {
 }
 ## aws_loadbalancer_target_group
 resource "aws_lb_target_group" "nginx" {
-  name     = "nginx-alb-tg"
+  name     = "${local.name_prefix}-alb-tg"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.vpc.id
+  vpc_id   = module.vpc.vpc_id
 
   tags = local.common_tags
 }
